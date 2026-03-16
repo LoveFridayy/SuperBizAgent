@@ -1,0 +1,25 @@
+.buildpath
+.hgignore.swp
+.project
+.orig
+.swp
+.idea/
+.settings/
+.vscode/
+bin/
+**/.DS_Store
+gf
+main
+main.exe
+output/
+manifest/output/
+temp/
+temp.yaml
+bin
+
+manifest/docker/volumes
+
+# 忽略包含敏感信息的配置文件
+manifest/config/config.yaml
+.env
+.env.local
