@@ -212,7 +212,7 @@ cls_mcp_url: "your_mcp_url"  # 上一步获取的 MCP URL
 #### 1️⃣ 克隆项目
 
 ```bash
-git clone https://github.com/yourusername/SuperBizAgent.git
+git clone https://github.com/LoveFridayy/SuperBizAgent.git
 cd SuperBizAgent
 ```
 
