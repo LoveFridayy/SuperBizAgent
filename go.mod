@@ -21,6 +21,7 @@ require (
 
 require (
 	filippo.io/edwards25519 v1.1.0 // indirect
+	github.com/cloudwego/eino-ext/components/embedding/openai v0.0.0-20260316121515-014a29323bbe // indirect
 	github.com/go-sql-driver/mysql v1.8.1 // indirect
 	github.com/invopop/jsonschema v0.13.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect

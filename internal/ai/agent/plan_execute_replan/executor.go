@@ -7,6 +7,7 @@ import (
 
 	"github.com/cloudwego/eino/adk"
 	"github.com/cloudwego/eino/adk/prebuilt/planexecute"
+	"github.com/cloudwego/eino/components/tool"
 	"github.com/cloudwego/eino/compose"
 )
 
@@ -16,7 +17,11 @@ func NewExecutor(ctx context.Context) (adk.Agent, error) {
 	if err != nil {
 		return nil, err
 	}
-	toolList := mcpTool
+	toolList := make([]tool.BaseTool, 0)
+	// 只有当 MCP 工具可用时才添加
+	if len(mcpTool) > 0 {
+		toolList = append(toolList, mcpTool...)
+	}
 	// alerts
 	toolList = append(toolList, tools.NewPrometheusAlertsQueryTool())
 	// file

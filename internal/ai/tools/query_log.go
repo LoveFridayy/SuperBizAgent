@@ -5,6 +5,8 @@ import (
 
 	e_mcp "github.com/cloudwego/eino-ext/components/tool/mcp"
 	"github.com/cloudwego/eino/components/tool"
+	"github.com/gogf/gf/v2/frame/g"
+	"github.com/gogf/gf/v2/os/gctx"
 	"github.com/mark3labs/mcp-go/client"
 	"github.com/mark3labs/mcp-go/mcp"
 )
@@ -19,12 +21,15 @@ https://www.cloudwego.io/zh/docs/eino/ecosystem_integration/tool/tool_mcp/
 https://mcp-go.dev/clients
 */
 func GetLogMcpTool() ([]tool.BaseTool, error) {
-	// https://mcp-api.tencent-cloud.com/sse/XXXX
-	mcp_url := "填在这里"
-	if mcp_url == "" {
-		panic("要使用GetLogMcpTool，请先按照教程申请mcp url")
+	// 从配置文件读取 MCP URL
+	ctx := gctx.New()
+	mcpUrlConfig, err := g.Cfg().Get(ctx, "cls_mcp_url")
+	if err != nil || mcpUrlConfig.String() == "" {
+		// 优雅降级：返回空工具列表而不是 panic
+		return []tool.BaseTool{}, nil
 	}
-	ctx := context.Background()
+	mcp_url := mcpUrlConfig.String()
+	ctx = context.Background()
 	cli, err := client.NewSSEMCPClient(mcp_url)
 	if err != nil {
 		return []tool.BaseTool{}, err

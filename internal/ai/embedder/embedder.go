@@ -4,7 +4,7 @@ import (
 	"context"
 	"log"
 
-	"github.com/cloudwego/eino-ext/components/embedding/dashscope"
+	"github.com/cloudwego/eino-ext/components/embedding/openai"
 	"github.com/cloudwego/eino/components/embedding"
 	"github.com/gogf/gf/v2/frame/g"
 )
@@ -18,11 +18,15 @@ func DoubaoEmbedding(ctx context.Context) (eb embedding.Embedder, err error) {
 	if err != nil {
 		return nil, err
 	}
-	dim := 2048
-	embedder, err := dashscope.NewEmbedder(ctx, &dashscope.EmbeddingConfig{
-		Model:      model.String(),
-		APIKey:     api_key.String(),
-		Dimensions: &dim,
+	base_url, err := g.Cfg().Get(ctx, "doubao_embedding_model.base_url")
+	if err != nil {
+		return nil, err
+	}
+
+	embedder, err := openai.NewEmbedder(ctx, &openai.EmbeddingConfig{
+		Model:   model.String(),
+		APIKey:  api_key.String(),
+		BaseURL: base_url.String(),
 	})
 	if err != nil {
 		log.Printf("new embedder error: %v\n", err)

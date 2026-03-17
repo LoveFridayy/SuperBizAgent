@@ -50,6 +50,8 @@ github.com/cloudwego/eino-ext/components/document/transformer/splitter/markdown 
 github.com/cloudwego/eino-ext/components/document/transformer/splitter/markdown v0.0.0-20251022075257-f53d64495d2f/go.mod h1:HZNxjGsgkN+1jsXdcKR8TwnE7J3W5C8aqX/hwWyAOoU=
 github.com/cloudwego/eino-ext/components/embedding/dashscope v0.0.0-20260109062358-b9080dbc7bed h1:2lLlRS+fmzYvlKSRVYXOdFPA74WN674rQ51Po/cKp2g=
 github.com/cloudwego/eino-ext/components/embedding/dashscope v0.0.0-20260109062358-b9080dbc7bed/go.mod h1:ekJmA+GLD9vJyZNeODZDBFMiJ92Suy6nF0OY42X3sao=
+github.com/cloudwego/eino-ext/components/embedding/openai v0.0.0-20260316121515-014a29323bbe h1:MP2rsu6n/kI/21MOzBevAvKiSf614g1QD7rT0aAfGdo=
+github.com/cloudwego/eino-ext/components/embedding/openai v0.0.0-20260316121515-014a29323bbe/go.mod h1:SajSFFRIXJXIbxadAAlSUIS5KTY8R/jzJg9RNSOXCCI=
 github.com/cloudwego/eino-ext/components/indexer/milvus v0.0.0-20251011073417-75b93b87b8a9 h1:MMqIG9ogRY3jjmlJ4qnSEnBG5/ToFtOhMfEKkIlN1AY=
 github.com/cloudwego/eino-ext/components/indexer/milvus v0.0.0-20251011073417-75b93b87b8a9/go.mod h1:Hdm2ql0T4+QcZoOVmgH9xovEJaTiQowKq3bc+lAXr50=
 github.com/cloudwego/eino-ext/components/model/openai v0.1.1 h1:VRdUDcnfi/T8F0jcuovhdADU9Io/oMqiKpY2ZJTBc1o=
