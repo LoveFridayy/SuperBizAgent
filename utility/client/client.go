@@ -93,13 +93,24 @@ func NewMilvusClient(ctx context.Context) (cli.Client, error) {
 		}
 
 		// 为vector字段创建autoindex索引
-		vectorIndex, err := entity.NewIndexAUTOINDEX(entity.HAMMING)
+		vectorIndex, err := entity.NewIndexAUTOINDEX(entity.COSINE) // 改为 COSINE 距离
 		if err != nil {
 			return nil, fmt.Errorf("failed to create vector index: %w", err)
 		}
 		err = agentClient.CreateIndex(ctx, common.MilvusCollectionName, "vector", vectorIndex, false)
 		if err != nil {
 			return nil, fmt.Errorf("failed to create vector index: %w", err)
+		}
+		// 加载集合到内存
+		err = agentClient.LoadCollection(ctx, common.MilvusCollectionName, false)
+		if err != nil {
+			return nil, fmt.Errorf("failed to load collection: %w", err)
+		}
+	} else {
+		// 集合已存在，确保已加载到内存
+		err = agentClient.LoadCollection(ctx, common.MilvusCollectionName, false)
+		if err != nil {
+			return nil, fmt.Errorf("failed to load collection: %w", err)
 		}
 	}
 
@@ -119,10 +130,10 @@ var fields = []*entity.Field{
 		PrimaryKey: true,
 	},
 	{
-		Name:     "vector", // 确保字段名匹配
-		DataType: entity.FieldTypeBinaryVector,
+		Name:     "vector",
+		DataType: entity.FieldTypeFloatVector, // 改为浮点向量
 		TypeParams: map[string]string{
-			"dim": "65536",
+			"dim": "1024", // 阿里云 text-embedding-v3 的维度
 		},
 	},
 	{

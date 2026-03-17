@@ -20,10 +20,10 @@ ds_quick_chat_model:
   model: "deepseek-v3-1-terminus"
 
 doubao_embedding_model:
-  api_key: "这里使用阿里百炼的api"
+  api_key: "sk-e94d0aa0fcbd4a9e9c3efc7482722960"
   base_url: "https://dashscope.aliyuncs.com/compatible-mode/v1"
-  model: "text-embedding-v4"
+  model: "text-embedding-v3"
 
 
-file_dir: "/你的路径/SuperBizAgent/internal/ai/cmd/knowledge_cmd/docs"
+file_dir: "D:/Go-project/SuperBizAgent/internal/ai/cmd/knowledge_cmd/docs"
 

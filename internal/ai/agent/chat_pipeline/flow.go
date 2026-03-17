@@ -21,19 +21,18 @@ func newReactAgentLambda(ctx context.Context) (lba *compose.Lambda, err error) {
 	//if err != nil {
 	//	return nil, err
 	//}
-	mcpTool, err := tools.GetLogMcpTool()
-	if err != nil {
-		return nil, err
-	}
-	// 只有当 MCP 工具可用时才添加
-	if len(mcpTool) > 0 {
-		config.ToolsConfig.Tools = mcpTool
-	}
+	// MCP 日志工具暂时禁用（腾讯云 CLS 服务未开通）
+	// mcpTool, err := tools.GetLogMcpTool()
+	// if err != nil {
+	// 	return nil, err
+	// }
+	// if len(mcpTool) > 0 {
+	// 	config.ToolsConfig.Tools = mcpTool
+	// }
 	config.ToolsConfig.Tools = append(config.ToolsConfig.Tools, tools.NewPrometheusAlertsQueryTool())
 	config.ToolsConfig.Tools = append(config.ToolsConfig.Tools, tools.NewMysqlCrudTool())
 	config.ToolsConfig.Tools = append(config.ToolsConfig.Tools, tools.NewGetCurrentTimeTool())
-	// 暂时禁用知识库检索工具，等配置好正确的 embedding endpoint ID 后再启用
-	// config.ToolsConfig.Tools = append(config.ToolsConfig.Tools, tools.NewQueryInternalDocsTool())
+	config.ToolsConfig.Tools = append(config.ToolsConfig.Tools, tools.NewQueryInternalDocsTool())
 
 	ins, err := react.NewAgent(ctx, config)
 	if err != nil {
