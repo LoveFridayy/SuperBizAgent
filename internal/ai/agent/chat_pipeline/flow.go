@@ -21,14 +21,14 @@ func newReactAgentLambda(ctx context.Context) (lba *compose.Lambda, err error) {
 	//if err != nil {
 	//	return nil, err
 	//}
-	// MCP 日志工具暂时禁用（腾讯云 CLS 服务未开通）
-	// mcpTool, err := tools.GetLogMcpTool()
-	// if err != nil {
-	// 	return nil, err
-	// }
-	// if len(mcpTool) > 0 {
-	// 	config.ToolsConfig.Tools = mcpTool
-	// }
+	// MCP 日志工具
+	mcpTool, err := tools.GetLogMcpTool()
+	if err != nil {
+		return nil, err
+	}
+	if len(mcpTool) > 0 {
+		config.ToolsConfig.Tools = append(config.ToolsConfig.Tools, mcpTool...)
+	}
 	config.ToolsConfig.Tools = append(config.ToolsConfig.Tools, tools.NewPrometheusAlertsQueryTool())
 	config.ToolsConfig.Tools = append(config.ToolsConfig.Tools, tools.NewMysqlCrudTool())
 	config.ToolsConfig.Tools = append(config.ToolsConfig.Tools, tools.NewGetCurrentTimeTool())

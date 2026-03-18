@@ -12,15 +12,15 @@ import (
 )
 
 func NewExecutor(ctx context.Context) (adk.Agent, error) {
-	// MCP 日志工具暂时禁用（腾讯云 CLS 服务未开通）
-	// mcpTool, err := tools.GetLogMcpTool()
-	// if err != nil {
-	// 	return nil, err
-	// }
-	// if len(mcpTool) > 0 {
-	// 	toolList = append(toolList, mcpTool...)
-	// }
 	toolList := make([]tool.BaseTool, 0)
+	// MCP 日志工具
+	mcpTool, err := tools.GetLogMcpTool()
+	if err != nil {
+		return nil, err
+	}
+	if len(mcpTool) > 0 {
+		toolList = append(toolList, mcpTool...)
+	}
 	// alerts
 	toolList = append(toolList, tools.NewPrometheusAlertsQueryTool())
 	// file
